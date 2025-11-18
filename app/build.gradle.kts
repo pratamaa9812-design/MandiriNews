@@ -1,4 +1,8 @@
 plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+}
+plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
@@ -6,14 +10,12 @@ plugins {
 
 android {
     namespace = "dev.rakamin.newsapp"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "dev.rakamin.newsapp"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -29,19 +31,27 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
     }
 }
 
 dependencies {
+    // === DEPENDENCIES BAWAAN TEMPLATE COMPOSE ===
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -57,27 +67,29 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-}
 
-dependencies {
-    // ... dependencies standar lainnya
+    // === DEPENDENCIES BERITA (RETROFIT, GLIDE, DLL) ===
 
-    // Networking (Retrofit)
+    // Retrofit API Client
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
-    // OkHttp & Logging Interceptor
-    implementation("com.squareup.okhttp3:okhttp:4.11.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+    // Glide (image loader)
+    implementation("com.github.bumptech.glide:glide:4.15.1")
 
-    // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    // RecyclerView untuk list berita
+    implementation("androidx.recyclerview:recyclerview:1.3.0")
+
+    // CardView untuk item berita
+    implementation("androidx.cardview:cardview:1.0.0")
+
+    // ConstraintLayout untuk layout
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    // ViewPager2 untuk headline news
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
+
+    // Coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-
-    // Lifecycle components (ViewModel/LiveData)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
-
-    // Paging Library (Untuk Endless/Infinite Scrolling)
-    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
 }
