@@ -6,7 +6,7 @@ data class Article(
     val title: String?,
     val description: String?,
     val url: String?,
-    val urlTomage: String?,
-    val publisheAt: String?,
-    val Content: String
+    val urlToImage: String?,
+    val publishedAt: String?,
+    val content: String?
 )
