@@ -1,6 +1,6 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -42,11 +42,16 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.9.0") // Updated version
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.cardview)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.viewpager2)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 
     // === DEPENDENCIES BERITA (RETROFIT, GLIDE, DLL) ===
 
@@ -57,18 +62,6 @@ dependencies {
 
     // Glide (image loader)
     implementation("com.github.bumptech.glide:glide:4.15.1")
-
-    // RecyclerView untuk list berita
-    implementation("androidx.recyclerview:recyclerview:1.3.2") // Updated version
-
-    // CardView untuk item berita
-    implementation("androidx.cardview:cardview:1.0.0")
-
-    // ConstraintLayout untuk layout
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-
-    // ViewPager2 untuk headline news
-    implementation("androidx.viewpager2:viewpager2:1.1.0")
 
     // Coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
